@@ -85,7 +85,7 @@ export const constantRoutes = [
         path: 'index',
         component: () => import('@/views/bond/index'),
         name: 'bond',
-        meta: { title: '可转债', icon: 'documentation' }
+        meta: { title: '可转债比价表', icon: 'documentation' }
       }
     ]
   },
@@ -99,6 +99,18 @@ export const constantRoutes = [
       icon: 'guide'
     },
     children: [
+      {
+        path: 'index-ma',
+        component: () => import('@/views/strategy/ma-higher/index-ma'),
+        name: 'index-ma',
+        meta: { title: '指数均线多头' }
+      },
+      {
+        path: 'stock-ma',
+        component: () => import('@/views/strategy/ma-higher/stock-ma'),
+        name: 'stock-ma',
+        meta: { title: '个股均线多头' }
+      },
       {
         path: 'over-sold-new-stock',
         component: () => import('@/views/strategy/over-sold-new-stock/over-sold-new-stock'),

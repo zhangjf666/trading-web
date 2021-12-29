@@ -355,3 +355,23 @@ export function removeClass(ele, cls) {
     ele.className = ele.className.replace(reg, ' ')
   }
 }
+
+/**
+ * 判断一个对象中的所有属性是否为空
+ * @param {object} obj 
+ * @returns true都为空, flase不都为空
+ */
+export function objectIsEmpty(obj) {
+  let empty = null;
+  for (const key in obj) {
+      if (obj.hasOwnProperty(key)) {
+          if (obj[key] === null || obj[key] === '') {
+              empty = true;
+          } else {
+              empty = false;
+              break;
+          }
+      }
+  }
+  return empty;
+}
