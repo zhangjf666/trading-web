@@ -3,20 +3,26 @@
     <!--搜索栏-->
     <div class="head-container inline">
       <div class="left">
-        <el-form :inline="true" :model="query">
+        <el-form
+          :inline="true"
+          :model="indexQuery"
+        >
           <el-form-item>
             <el-checkbox v-model="indexQuery.industryCheck">行业指数</el-checkbox>
           </el-form-item>
           <el-form-item>
             <el-checkbox v-model="indexQuery.conceptCheck">概念指数</el-checkbox>
           </el-form-item>
-          <el-form-item class="form-item" label="多头持续时间">
+          <el-form-item
+            class="form-item"
+            label="持续时间"
+          >
             <el-input
               v-model="indexQuery.miniTrendDay"
               clearable
               size="small"
               placeholder="最小持续时间"
-              style="width: 130px;"
+              style="width: 130px"
               class="filter-item"
             />-
             <el-input
@@ -24,28 +30,37 @@
               clearable
               size="small"
               placeholder="最大持续时间"
-              style="width: 130px;"
+              style="width: 130px"
               class="filter-item"
             />
           </el-form-item>
 
-          <el-form-item class="form-item" size="small">
-            <el-button type="primary" @click="queryIndexData">查询</el-button>
+          <el-form-item
+            class="form-item"
+            size="small"
+          >
+            <el-button
+              type="primary"
+              @click="queryIndexData"
+            >查询指数</el-button>
           </el-form-item>
         </el-form>
         <u-table
-          ref="table"
-          :data="data"
+          ref="indexTable"
+          :data="indexData"
           style="width: 100%"
           stripe
           :height="tableHeight"
           use-virtual
           showBodyOverflow="title"
           showHeaderOverflow="title"
-          :header-cell-style="headerStyle"
+          :header-cell-style="headerStyle('index')"
+          @selection-change="indexSelectionChange"
         >
+          <u-table-column type="selection" align="center">
+          </u-table-column>
           <u-table-column
-            v-for="(item,index) in indexTableHeader"
+            v-for="(item, index) in indexTableHeader"
             :fixed="isFixed(item)"
             :label="item.label"
             :key="index"
@@ -55,39 +70,75 @@
         </u-table>
       </div>
       <div class="right">
-        <el-form>
-          <el-form-item class="form-item" label="可转债价格范围">
+        <el-form
+          :inline="true"
+          :model="stockQuery"
+        >
+          <el-form-item
+            class="form-item"
+            label="持续时间"
+          >
             <el-input
-              v-model="query.miniBondPrice"
+              v-model="stockQuery.miniTrendDay"
               clearable
               size="small"
-              placeholder="最低价格"
-              style="width: 120px;"
+              placeholder="最小持续时间"
+              style="width: 120px"
               class="filter-item"
             />-
             <el-input
-              v-model="query.maxBondPrice"
+              v-model="stockQuery.maxTrendDay"
               clearable
               size="small"
-              placeholder="最高价格"
-              style="width: 120px;"
+              placeholder="最大持续时间"
+              style="width: 120px"
               class="filter-item"
             />
           </el-form-item>
+          <el-form-item
+            class="form-item"
+            label="流通市值(亿)"
+          >
+            <el-input
+              v-model="stockQuery.miniMarketValue"
+              clearable
+              size="small"
+              placeholder="最小流通市值"
+              style="width: 120px"
+              class="filter-item"
+            />-
+            <el-input
+              v-model="stockQuery.maxMarketValue"
+              clearable
+              size="small"
+              placeholder="最大流通市值"
+              style="width: 120px"
+              class="filter-item"
+            />
+          </el-form-item>
+          <el-form-item
+            class="form-item"
+            size="small"
+          >
+            <el-button
+              type="danger"
+              @click="queryStockData"
+            >查询个股</el-button>
+          </el-form-item>
         </el-form>
         <u-table
-          ref="table"
-          :data="data"
+          ref="stockTable"
+          :data="stockData"
           style="width: 100%"
           stripe
           :height="tableHeight"
           use-virtual
           showBodyOverflow="title"
           showHeaderOverflow="title"
-          :header-cell-style="headerStyle"
+          :header-cell-style="headerStyle('stock')"
         >
           <u-table-column
-            v-for="(item,index) in tableHeader"
+            v-for="(item, index) in stockTableHeader"
             :fixed="isFixed(item)"
             :label="item.label"
             :key="index"
@@ -101,7 +152,7 @@
 </template>
 
 <script>
-import { getIndexMa } from "@/api/trading";
+import { getIndexMa, getStockMa } from "@/api/trading";
 import { objectIsEmpty } from "@/utils/index";
 
 export default {
@@ -119,14 +170,23 @@ export default {
         { label: "起始时间" },
         { label: "持续天数" },
       ],
-      data: [],
+      stockTableHeader: [
+        { label: "代码" },
+        { label: "名称" },
+        { label: "总市值(亿)" },
+        { label: "流通市值(亿)" },
+        { label: "起始时间" },
+        { label: "持续天数" },
+      ],
+      indexData: [],
+      stockData: [],
       indexQuery: {
         industryCheck: true,
         conceptCheck: true,
         miniTrendDay: "",
         maxTrendDay: "",
       },
-      query: {
+      stockQuery: {
         miniTrendDay: "",
         maxTrendDay: "",
         miniMarketValue: "",
@@ -138,7 +198,7 @@ export default {
   },
   mounted() {
     this.$nextTick(function () {
-      this.tableOffsetTop = this.$refs.table.$el.offsetTop;
+      this.tableOffsetTop = this.$refs.indexTable.$el.offsetTop;
       this.tableHeight = window.innerHeight - this.tableOffsetTop - 110;
 
       // 监听窗口大小变化
@@ -179,7 +239,43 @@ export default {
       }
 
       getIndexMa(param).then((res) => {
-        this.data = res.data;
+        this.indexData = res.data;
+      });
+    },
+    queryStockData() {
+      var param = {};
+      if (
+        this.stockQuery.miniTrendDay != null &&
+        this.stockQuery.miniTrendDay != ""
+      ) {
+        param["miniTrendDay"] = this.stockQuery.miniTrendDay;
+      }
+      if (
+        this.stockQuery.maxTrendDay != null &&
+        this.stockQuery.maxTrendDay != ""
+      ) {
+        param["maxTrendDay"] = this.stockQuery.maxTrendDay;
+      }
+      if (
+        this.stockQuery.miniMarketValue != null &&
+        this.stockQuery.miniMarketValue != ""
+      ) {
+        param["miniMarketValue"] = this.stockQuery.miniMarketValue;
+      }
+      if (
+        this.stockQuery.maxMarketValue != null &&
+        this.stockQuery.maxMarketValue != ""
+      ) {
+        param["maxMarketValue"] = this.stockQuery.maxMarketValue;
+      }
+      if (this.stockQuery.industrys.length != 0) {
+        param["industrys"] = this.stockQuery.industrys;
+      }
+      if (this.stockQuery.concepts.length != 0) {
+        param["concepts"] = this.stockQuery.concepts;
+      }
+      getStockMa(param).then((res) => {
+        this.stockData = res.data;
       });
     },
     isFixed(item) {
@@ -188,13 +284,26 @@ export default {
       // }
       return false;
     },
-    headerStyle() {
-      return {
-        "background-color": "#66B1FF",
-        color: "#FFFFFF",
-        "border-bottom": "1px #409EFF solid",
+    headerStyle(type) {
+      return type == 'index' ? { "background-color": "#66B1FF", color: "#FFFFFF", "border-bottom": "1px #409EFF solid", } : {
+        "background-color": "#F78989", color: "#FFFFFF", "border-bottom": "1px #F56C6C solid",
       };
     },
+    indexSelectionChange(val) {
+      if(val.length == 0){
+        return
+      }
+      this.stockQuery.industrys = []
+      this.stockQuery.concepts = []
+      for(var item of val){
+        var indexType = item['指数类型']
+        if(indexType == '行业指数'){
+          this.stockQuery.industrys.push(item['代码'])
+        } else if(indexType == '概念指数'){
+          this.stockQuery.concepts.push(item['代码'])
+        }
+      }
+    }
   },
 };
 </script>
@@ -211,12 +320,12 @@ export default {
   flex-direction: row;
 }
 .left {
-  width: 40%;
+  width: 45%;
   height: 100%;
   padding-right: 10px;
 }
 .right {
-  width: 60%;
+  width: 55%;
   height: 100%;
 }
 </style>
