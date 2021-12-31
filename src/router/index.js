@@ -115,13 +115,7 @@ export const constantRoutes = [
         path: 'over-sold-new-stock',
         component: () => import('@/views/strategy/over-sold-new-stock/over-sold-new-stock'),
         name: 'over-sold-new-stock',
-        meta: { title: '超跌次新策略' }
-      },
-      {
-        path: 'over-sold-new-stock-sell',
-        component: () => import('@/views/strategy/over-sold-new-stock/over-sold-new-stock-sell'),
-        name: 'over-sold-new-stock-sell',
-        meta: { title: '超跌次新卖出策略' }
+        meta: { title: '超跌次新买卖策略' }
       }
     ]
   },

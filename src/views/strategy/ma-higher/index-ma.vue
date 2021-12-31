@@ -156,7 +156,7 @@ import { getIndexMa, getStockMa } from "@/api/trading";
 import { objectIsEmpty } from "@/utils/index";
 
 export default {
-  name: "InlineEditTable",
+  name: "index-ma",
   data() {
     return {
       tableHeight: 500,

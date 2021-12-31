@@ -6,7 +6,9 @@ import 'normalize.css/normalize.css' // a modern alternative to CSS resets
 
 import Element from 'element-ui'
 import './styles/element-variables.scss'
-import enLang from 'element-ui/lib/locale/lang/en'// 如果使用中文语言包请默认支持，无需额外引入，请删除该依赖
+// import enLang from 'element-ui/lib/locale/lang/en'// 如果使用中文语言包请默认支持，无需额外引入，请删除该依赖
+// 挂载全局messge
+import { Message } from 'element-ui'
 
 import UmyUi from 'umy-ui' // 引入umy-ui
 import 'umy-ui/lib/theme-chalk/index.css'; // 引入样式
@@ -38,7 +40,7 @@ if (process.env.NODE_ENV === 'production') {
 
 Vue.use(Element, {
   size: Cookies.get('size') || 'medium', // set element-ui default size
-  locale: enLang // 如果使用中文，无需设置，请删除
+  // locale: enLang // 如果使用中文，无需设置，请删除
 })
 
 Vue.use(UmyUi)
@@ -48,6 +50,7 @@ Object.keys(filters).forEach(key => {
   Vue.filter(key, filters[key])
 })
 
+Vue.prototype.$message = Message
 Vue.config.productionTip = false
 
 new Vue({

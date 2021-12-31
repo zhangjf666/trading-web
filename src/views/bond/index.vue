@@ -100,7 +100,6 @@ export default {
         { label: "正股名称" },
         { label: "正股最新价" },
         { label: "正股涨跌幅" },
-        { label: "申购日期" },
         { label: "上市日期" },
       ],
       data: [],

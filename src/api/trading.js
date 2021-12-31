@@ -30,3 +30,51 @@ export function getStockMa(data) {
     }
   })
 }
+
+// 超跌次新买入股票
+export function getOverSoldNewStock(data) {
+  return request({
+    url: '/strategy/select-oversold-stock',
+    method: 'get',
+    params: data,
+    paramsSerializer: data => {
+      return qs.stringify(data, {indices: false})
+    }
+  })
+}
+
+// 超跌次新卖出股票
+export function getOverSoldNewStockSell(data) {
+  return request({
+    url: '/strategy/sell-over-stock',
+    method: 'get',
+    params: data,
+    paramsSerializer: data => {
+      return qs.stringify(data, {indices: false})
+    }
+  })
+}
+
+// 获取行业板块列表
+export function getIndustryList(data) {
+  return request({
+    url: '/collect/industry-list',
+    method: 'get',
+    params: data,
+    paramsSerializer: data => {
+      return qs.stringify(data, {indices: false})
+    }
+  })
+}
+
+// 获取概念板块列表
+export function getConceptList(data) {
+  return request({
+    url: '/collect/concept-list',
+    method: 'get',
+    params: data,
+    paramsSerializer: data => {
+      return qs.stringify(data, {indices: false})
+    }
+  })
+}
