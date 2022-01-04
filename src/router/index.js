@@ -116,6 +116,18 @@ export const constantRoutes = [
         component: () => import('@/views/strategy/over-sold-new-stock/over-sold-new-stock'),
         name: 'over-sold-new-stock',
         meta: { title: '超跌次新买卖策略' }
+      },
+      {
+        path: 'n2s-sign',
+        component: () => import('@/views/strategy/n2s/n2s-sign'),
+        name: 'n2s-sign',
+        meta: { title: '北向资金均值买卖策略' }
+      },
+      {
+        path: 'n2s-sign-test',
+        component: () => import('@/views/strategy/n2s/n2s-sign-test'),
+        name: 'n2s-sign-test',
+        meta: { title: '北向资金均值策略回测' }
       }
     ]
   },

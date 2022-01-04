@@ -43,6 +43,30 @@ export function getOverSoldNewStock(data) {
   })
 }
 
+// 获取北向资金策略买卖点位数据
+export function getN2sSign(data) {
+  return request({
+    url: '/strategy/n2s-sign',
+    method: 'get',
+    params: data,
+    paramsSerializer: data => {
+      return qs.stringify(data, {indices: false})
+    }
+  })
+}
+
+// 获取北向资金策略回测数据
+export function getN2sSignTest(data) {
+  return request({
+    url: '/strategy/n2s-sign-test',
+    method: 'get',
+    params: data,
+    paramsSerializer: data => {
+      return qs.stringify(data, {indices: false})
+    }
+  })
+}
+
 // 超跌次新卖出股票
 export function getOverSoldNewStockSell(data) {
   return request({
