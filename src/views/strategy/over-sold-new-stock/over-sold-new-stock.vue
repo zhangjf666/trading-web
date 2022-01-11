@@ -157,10 +157,10 @@ export default {
       }
       var param = {'beginDate': this.query.value[0], 'endDate': this.query.value[1]}
       getOverSoldNewStock(param).then(res => {
-        this.stockData = res.data;
+        this.stockData = res.data.data;
       });
       getOverSoldNewStockSell(param).then(res => {
-        this.sellData = res.data
+        this.sellData = res.data.data
       })
     },
     isFixed(item) {

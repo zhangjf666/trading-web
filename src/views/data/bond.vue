@@ -130,7 +130,7 @@ export default {
         this.query = {};
       }
       getBond(this.query).then((res) => {
-        this.data = res.data;
+        this.data = res.data.data;
       });
     },
     isFixed(item) {

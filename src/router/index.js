@@ -78,14 +78,38 @@ export const constantRoutes = [
     ]
   },
   {
-    path: '/bond',
+    path: '/data',
     component: Layout,
+    redirect: '/data/index',
+    name: 'data',
+    meta: {
+      title: '数据',
+      icon: 'documentation'
+    },
     children: [
       {
-        path: 'index',
-        component: () => import('@/views/bond/index'),
+        path: 'jszb',
+        component: () => import('@/views/data/jszb'),
+        name: 'jszb',
+        meta: { title: '技术指标' }
+      },
+      {
+        path: 'zjlx',
+        component: () => import('@/views/data/zjlx'),
+        name: 'zjlx',
+        meta: { title: '资金流向' }
+      },
+      {
+        path: 'bond',
+        component: () => import('@/views/data/bond'),
         name: 'bond',
-        meta: { title: '可转债比价表', icon: 'documentation' }
+        meta: { title: '可转债比价表' }
+      },
+      {
+        path: 'jgdytj',
+        component: () => import('@/views/data/jgdytj'),
+        name: 'jgdytj',
+        meta: { title: '机构调研统计' }
       }
     ]
   },

@@ -142,12 +142,12 @@ export default {
   methods: {
     queryBoardList(){
         getIndustryList().then(res => {
-            this.industryListData = res.data
-            this.industryOption = res.data
+            this.industryListData = res.data.data
+            this.industryOption = res.data.data
         })
         getConceptList().then(res => {
-            this.conceptListData = res.data
-            this.conceptOption = res.data
+            this.conceptListData = res.data.data
+            this.conceptOption = res.data.data
         })
     },
     queryStockData() {
@@ -183,7 +183,7 @@ export default {
         param["concepts"] = this.stockQuery.concepts;
       }
       getStockMa(param).then((res) => {
-        this.stockData = res.data;
+        this.stockData = res.data.data;
       });
     },
     isFixed(item) {

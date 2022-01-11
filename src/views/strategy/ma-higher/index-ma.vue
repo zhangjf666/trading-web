@@ -239,7 +239,7 @@ export default {
       }
 
       getIndexMa(param).then((res) => {
-        this.indexData = res.data;
+        this.indexData = res.data.data;
       });
     },
     queryStockData() {
@@ -275,7 +275,7 @@ export default {
         param["concepts"] = this.stockQuery.concepts;
       }
       getStockMa(param).then((res) => {
-        this.stockData = res.data;
+        this.stockData = res.data.data;
       });
     },
     isFixed(item) {

@@ -102,3 +102,30 @@ export function getConceptList(data) {
     }
   })
 }
+
+// 机构调研统计
+export function getJgdytj(data) {
+  return request({
+    url: '/collect/jgdytj',
+    method: 'get',
+    params: data
+  })
+}
+
+// 技术指标
+export function getJszb(data) {
+  return request({
+    url: '/collect/jszb',
+    method: 'get',
+    params: data
+  })
+}
+
+// 资金流向
+export function getZjlx(data) {
+  return request({
+    url: '/collect/zjlx',
+    method: 'get',
+    params: data
+  })
+}
