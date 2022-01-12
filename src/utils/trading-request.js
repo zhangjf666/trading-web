@@ -6,7 +6,7 @@ import defaultSettings from '@/settings'
 
 // create an axios instance
 const service = axios.create({
-  // baseURL: process.env.TRADING_URL, // url = base url + request url
+  baseURL: process.env.VUE_APP_TRADING_API, // url = base url + request url
   // withCredentials: true, // send cookies when cross-domain requests
   timeout: 5000 // request timeout
 })
@@ -21,7 +21,6 @@ service.interceptors.request.use(
       // please modify it according to the actual situation
       config.headers['X-Token'] = getToken()
     }
-    config.baseURL = defaultSettings.apiUrl
     return config
   },
   error => {

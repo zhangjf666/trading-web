@@ -260,7 +260,7 @@ export default {
               up.push(item['up'])
               down.push(item['down'])
               if(item['buy'] != null){
-                  markPoint.push({name: '买', value: '卖', xAxis: item['日期'], yAxis: item['当日成交净买额'],
+                  markPoint.push({name: '买', value: '买', xAxis: item['日期'], yAxis: item['当日成交净买额'],
                   itemStyle: {
                       normal: {
                           color: '#96CF16',
