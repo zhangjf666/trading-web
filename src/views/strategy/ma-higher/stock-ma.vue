@@ -85,6 +85,7 @@
             :label="item.label"
             :key="index"
             :property="item.label"
+            sortable
             align="center"
           ></u-table-column>
         </u-table>
@@ -101,14 +102,7 @@ export default {
     return {
       tableHeight: 500,
       tableOffsetTop: 0,
-      stockTableHeader: [
-        { label: "代码" },
-        { label: "名称" },
-        { label: "总市值(亿)" },
-        { label: "流通市值(亿)" },
-        { label: "起始时间" },
-        { label: "持续天数" },
-      ],
+      stockTableHeader: [],
       industryListData: [],
       industryOption: [],
       conceptListData: [],
@@ -183,6 +177,10 @@ export default {
         param["concepts"] = this.stockQuery.concepts;
       }
       getStockMa(param).then((res) => {
+        this.stockTableHeader = []
+        Object.values(res.data.columns).forEach(key => {
+            this.stockTableHeader.push({'label': key})
+        })
         this.stockData = res.data.data;
       });
     },

@@ -46,6 +46,7 @@
         :label="item.label"
         :key="index"
         :property="item.label"
+        sortable
         align="center"
       ></u-table-column>
     </u-table>
@@ -63,6 +64,7 @@ export default {
       tableHeight: 500,
       tableOffsetTop: 0,
       tableHeader: [],
+      headerExclued: ['公告日期'],
       data: [],
       query: {
         value:''
@@ -124,7 +126,7 @@ export default {
       getJgdytj(param).then((res) => {
             this.tableHeader = []
             Object.values(res.data.columns).forEach(key => {
-                if (key != '公告日期'){
+                if (!this.headerExclued.includes(key)){
                     this.tableHeader.push({'label': key})
                 }
             })

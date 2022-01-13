@@ -69,6 +69,7 @@
         :label="item.label"
         :key="index"
         :property="item.label"
+        sortable
         align="center"
       ></u-table-column>
     </u-table>
@@ -162,11 +163,9 @@ export default {
         endDate: this.query.date[1],
       };
       getJszb(param).then((res) => {
-        this.tableHeader = []
+            this.tableHeader = []
             Object.values(res.data.columns).forEach(key => {
-                if (key != '公告日期'){
-                    this.tableHeader.push({'label': key})
-                }
+                this.tableHeader.push({'label': key})
             })
             this.data = res.data.data;
       });

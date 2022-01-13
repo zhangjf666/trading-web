@@ -65,6 +65,7 @@
             :label="item.label"
             :key="index"
             :property="item.label"
+            sortable
             align="center"
           ></u-table-column>
         </u-table>
@@ -143,6 +144,7 @@
             :label="item.label"
             :key="index"
             :property="item.label"
+            sortable
             align="center"
           ></u-table-column>
         </u-table>
@@ -161,23 +163,8 @@ export default {
     return {
       tableHeight: 500,
       tableOffsetTop: 0,
-      indexTableHeader: [
-        { label: "指数类型" },
-        { label: "代码" },
-        { label: "名称" },
-        { label: "成交量(亿)" },
-        { label: "成交额(亿)" },
-        { label: "起始时间" },
-        { label: "持续天数" },
-      ],
-      stockTableHeader: [
-        { label: "代码" },
-        { label: "名称" },
-        { label: "总市值(亿)" },
-        { label: "流通市值(亿)" },
-        { label: "起始时间" },
-        { label: "持续天数" },
-      ],
+      indexTableHeader: [],
+      stockTableHeader: [],
       indexData: [],
       stockData: [],
       indexQuery: {
@@ -239,6 +226,10 @@ export default {
       }
 
       getIndexMa(param).then((res) => {
+        this.indexTableHeader = []
+        Object.values(res.data.columns).forEach(key => {
+            this.indexTableHeader.push({'label': key})
+        })
         this.indexData = res.data.data;
       });
     },
@@ -275,6 +266,10 @@ export default {
         param["concepts"] = this.stockQuery.concepts;
       }
       getStockMa(param).then((res) => {
+        this.stockTableHeader = []
+        Object.values(res.data.columns).forEach(key => {
+            this.stockTableHeader.push({'label': key})
+        })
         this.stockData = res.data.data;
       });
     },

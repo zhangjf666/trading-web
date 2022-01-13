@@ -47,6 +47,7 @@
             :label="item.label"
             :key="index"
             :property="item.label"
+            sortable
             align="center"
           ></u-table-column>
         </u-table>
@@ -69,6 +70,7 @@
             :label="item.label"
             :key="index"
             :property="item.label"
+            sortable
             align="center"
           ></u-table-column>
         </u-table>
@@ -86,27 +88,8 @@ export default {
   data() {
     return {
       tableOffsetTop: 0,
-      stockTableHeader: [
-        { label: "日期" },
-        { label: "代码" },
-        { label: "名称" },
-        { label: "最大回撤" },
-        { label: "回撤最高日期" },
-        { label: "回撤最低日期" },
-        { label: "总市值(亿)" },
-        { label: "流通市值(亿)" }
-      ],
-      sellTableHeader: [
-        { label: "日期" },
-        { label: "代码" },
-        { label: "名称" },
-        { label: "买入日期" },
-        { label: "卖出日期" },
-        { label: "收盘" },
-        { label: "涨幅(%)" },
-        { label: "跌幅(%)" },
-        { label: "持有天数"}
-      ],
+      stockTableHeader: [],
+      sellTableHeader: [],
       stockData: [],
       sellData: [],
       query: {
@@ -157,9 +140,17 @@ export default {
       }
       var param = {'beginDate': this.query.value[0], 'endDate': this.query.value[1]}
       getOverSoldNewStock(param).then(res => {
+        this.stockTableHeader = []
+        Object.values(res.data.columns).forEach(key => {
+            this.stockTableHeader.push({'label': key})
+        })
         this.stockData = res.data.data;
       });
       getOverSoldNewStockSell(param).then(res => {
+        this.sellTableHeader = []
+        Object.values(res.data.columns).forEach(key => {
+            this.sellTableHeader.push({'label': key})
+        })
         this.sellData = res.data.data
       })
     },

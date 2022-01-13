@@ -30,6 +30,7 @@
         :label="item.label"
         :key="index"
         :property="item.label"
+        sortable
         align="center"
       ></u-table-column>
     </u-table>
