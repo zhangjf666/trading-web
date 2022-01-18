@@ -130,7 +130,7 @@ export default {
       if (objectIsEmpty(this.query)) {
         this.query = {};
       }
-      getBond(this.query).then((res) => {
+      getBond(this.query, true).then((res) => {
         this.data = res.data.data;
       });
     },

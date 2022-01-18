@@ -2,7 +2,7 @@ import axios from 'axios'
 import { MessageBox, Message } from 'element-ui'
 import store from '@/store'
 import { getToken } from '@/utils/auth'
-import defaultSettings from '@/settings'
+import { showLoading, hideLoading } from '@/utils/loading'
 
 // create an axios instance
 const service = axios.create({
@@ -20,6 +20,9 @@ service.interceptors.request.use(
       // ['X-Token'] is a custom headers key
       // please modify it according to the actual situation
       config.headers['X-Token'] = getToken()
+    }
+    if(config.showLoading === true){
+      showLoading()
     }
     return config
   },
@@ -43,6 +46,9 @@ service.interceptors.response.use(
    * You can also judge the status by HTTP Status Code
    */
   response => {
+    if(response.config.showLoading === true){
+      hideLoading()
+    }
     const res = response.data
 
     // if the custom code is not 20000, it is judged as an error.
@@ -72,6 +78,7 @@ service.interceptors.response.use(
     }
   },
   error => {
+    hideLoading()
     console.log('err' + error) // for debug
     Message({
       message: error.msg,

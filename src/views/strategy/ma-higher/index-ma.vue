@@ -225,7 +225,7 @@ export default {
         param["maxTrendDay"] = this.indexQuery.maxTrendDay;
       }
 
-      getIndexMa(param).then((res) => {
+      getIndexMa(param, true).then((res) => {
         this.indexTableHeader = []
         Object.values(res.data.columns).forEach(key => {
             this.indexTableHeader.push({'label': key})
@@ -265,7 +265,7 @@ export default {
       if (this.stockQuery.concepts.length != 0) {
         param["concepts"] = this.stockQuery.concepts;
       }
-      getStockMa(param).then((res) => {
+      getStockMa(param, true).then((res) => {
         this.stockTableHeader = []
         Object.values(res.data.columns).forEach(key => {
             this.stockTableHeader.push({'label': key})

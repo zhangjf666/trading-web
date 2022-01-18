@@ -123,7 +123,7 @@ export default {
         return
       }
       var param = {'beginDate': this.query.value[0], 'endDate': this.query.value[1]}
-      getJgdytj(param).then((res) => {
+      getJgdytj(param, true).then((res) => {
             this.tableHeader = []
             Object.values(res.data.columns).forEach(key => {
                 if (!this.headerExclued.includes(key)){

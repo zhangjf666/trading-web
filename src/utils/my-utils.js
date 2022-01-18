@@ -1,3 +1,4 @@
+import { Loading } from "element-ui";
 
 var util = {
     /**
@@ -12,6 +13,10 @@ var util = {
         var d = date.getDate();  
         d = d < 10 ? ('0' + d) : d;  
         return y + '-' + m + '-' + d;  
+    },
+
+    loading: function() {
+        
     }
 }
 

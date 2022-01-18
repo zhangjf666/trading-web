@@ -242,7 +242,7 @@ export default {
   },
   methods: {
     queryData() {
-      getN2sSign(this.query).then((res) => {
+      getN2sSign(this.query, true).then((res) => {
         this.data = res.data.data;
       });
     },

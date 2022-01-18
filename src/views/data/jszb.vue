@@ -162,7 +162,7 @@ export default {
         beginDate: this.query.date[0],
         endDate: this.query.date[1],
       };
-      getJszb(param).then((res) => {
+      getJszb(param, true).then((res) => {
             this.tableHeader = []
             Object.values(res.data.columns).forEach(key => {
                 this.tableHeader.push({'label': key})

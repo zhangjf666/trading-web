@@ -8,6 +8,7 @@
             <el-tab-pane label="行业资金" name="2"></el-tab-pane>
         </el-tabs>
         <el-radio-group v-model="query.bdType" @change="queryData">
+            <el-radio-button label="0">当日排行</el-radio-button>
             <el-radio-button label="3">3日排行</el-radio-button>
             <el-radio-button label="5">5日排行</el-radio-button>
             <el-radio-button label="10">10日排行</el-radio-button>
@@ -70,7 +71,7 @@ export default {
   },
   methods: {
     queryData() {
-      getZjlx(this.query).then((res) => {
+      getZjlx(this.query, true).then((res) => {
         this.tableHeader = []
             Object.values(res.data.columns).forEach(key => {
                 if (key != '公告日期'){

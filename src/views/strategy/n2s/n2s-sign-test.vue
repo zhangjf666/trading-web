@@ -346,7 +346,7 @@ export default {
                     'period': this.query.period,
                    'startDate': this.query.date[0], 
                    'endDate': this.query.date[1]}
-      getN2sSignTest(param).then((res) => {
+      getN2sSignTest(param, true).then((res) => {
         this.data = res.data;
       });
     },

@@ -139,14 +139,14 @@ export default {
         return
       }
       var param = {'beginDate': this.query.value[0], 'endDate': this.query.value[1]}
-      getOverSoldNewStock(param).then(res => {
+      getOverSoldNewStock(param, true).then(res => {
         this.stockTableHeader = []
         Object.values(res.data.columns).forEach(key => {
             this.stockTableHeader.push({'label': key})
         })
         this.stockData = res.data.data;
       });
-      getOverSoldNewStockSell(param).then(res => {
+      getOverSoldNewStockSell(param, true).then(res => {
         this.sellTableHeader = []
         Object.values(res.data.columns).forEach(key => {
             this.sellTableHeader.push({'label': key})
