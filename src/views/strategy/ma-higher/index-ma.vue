@@ -216,15 +216,9 @@ export default {
       var param = {}
       if (this.indexQuery.industryCheck && this.indexQuery.conceptCheck) {
         param['boardType'] = '3'
-      } else if (
-        this.indexQuery.industryCheck == null ||
-        this.indexQuery.industryCheck == ''
-      ) {
+      } else if (this.indexQuery.industryCheck) {
         param['boardType'] = '1'
-      } else if (
-        this.indexQuery.conceptCheck == null ||
-        this.indexQuery.conceptCheck == ''
-      ) {
+      } else if (this.indexQuery.conceptCheck) {
         param['boardType'] = '2'
       }
       if (
