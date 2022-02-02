@@ -141,3 +141,16 @@ export function getZjlx(data, showLoading) {
     showLoading: showLoading
   })
 }
+
+// 资金流向
+export function getYjbg(data, showLoading) {
+  return request({
+    url: '/collect/yjbg',
+    method: 'get',
+    params: data,
+    showLoading: showLoading,
+    paramsSerializer: data => {
+      return qs.stringify(data, {indices: false})
+    }
+  })
+}

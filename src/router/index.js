@@ -110,6 +110,12 @@ export const constantRoutes = [
         component: () => import('@/views/data/jgdytj'),
         name: 'jgdytj',
         meta: { title: '机构调研统计' }
+      },
+      {
+        path: 'yjbg',
+        component: () => import('@/views/data/yjbg'),
+        name: 'yjbg',
+        meta: { title: '研究报告' }
       }
     ]
   },
