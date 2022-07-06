@@ -34,7 +34,48 @@
               class="filter-item"
             />
           </el-form-item>
-
+          <el-form-item
+          class="form-item"
+          label="涨幅(%)"
+        >
+          <el-input
+            v-model="indexQuery.miniRange"
+            clearable
+            size="small"
+            placeholder="最小涨幅"
+            style="width: 140px"
+            class="filter-item"
+          />-
+          <el-input
+            v-model="indexQuery.maxRange"
+            clearable
+            size="small"
+            placeholder="最大涨幅"
+            style="width: 140px"
+            class="filter-item"
+          />
+        </el-form-item>
+        <el-form-item
+          class="form-item"
+          label="涨速"
+        >
+          <el-input
+            v-model="indexQuery.miniSpeed"
+            clearable
+            size="small"
+            placeholder="最小涨速"
+            style="width: 140px"
+            class="filter-item"
+          />-
+          <el-input
+            v-model="indexQuery.maxSpeed"
+            clearable
+            size="small"
+            placeholder="最大涨速"
+            style="width: 140px"
+            class="filter-item"
+          />
+        </el-form-item>
           <el-form-item
             class="form-item"
             size="small"
@@ -95,6 +136,48 @@
               class="filter-item"
             />
           </el-form-item>
+          <el-form-item
+          class="form-item"
+          label="涨幅(%)"
+        >
+          <el-input
+            v-model="stockQuery.miniRange"
+            clearable
+            size="small"
+            placeholder="最小涨幅"
+            style="width: 140px"
+            class="filter-item"
+          />-
+          <el-input
+            v-model="stockQuery.maxRange"
+            clearable
+            size="small"
+            placeholder="最大涨幅"
+            style="width: 140px"
+            class="filter-item"
+          />
+        </el-form-item>
+        <el-form-item
+          class="form-item"
+          label="涨速"
+        >
+          <el-input
+            v-model="stockQuery.miniSpeed"
+            clearable
+            size="small"
+            placeholder="最小涨速"
+            style="width: 140px"
+            class="filter-item"
+          />-
+          <el-input
+            v-model="stockQuery.maxSpeed"
+            clearable
+            size="small"
+            placeholder="最大涨速"
+            style="width: 140px"
+            class="filter-item"
+          />
+        </el-form-item>
           <el-form-item
             class="form-item"
             label="流通市值(亿)"
@@ -233,6 +316,30 @@ export default {
       ) {
         param['maxTrendDay'] = this.indexQuery.maxTrendDay
       }
+      if (
+        this.indexQuery.miniRange != null &&
+        this.indexQuery.miniRange != ''
+      ) {
+        param['miniRange'] = this.indexQuery.miniRange
+      }
+      if (
+        this.indexQuery.maxRange != null &&
+        this.indexQuery.maxRange != ''
+      ) {
+        param['maxRange'] = this.indexQuery.maxRange
+      }
+      if (
+        this.indexQuery.miniSpeed != null &&
+        this.indexQuery.miniSpeed != ''
+      ) {
+        param['miniSpeed'] = this.indexQuery.miniSpeed
+      }
+      if (
+        this.indexQuery.maxSpeed != null &&
+        this.indexQuery.maxSpeed != ''
+      ) {
+        param['maxSpeed'] = this.indexQuery.maxSpeed
+      }
 
       getIndexMa(param, true).then((res) => {
         this.indexTableHeader = []
@@ -267,6 +374,30 @@ export default {
         this.stockQuery.maxMarketValue != ''
       ) {
         param['maxMarketValue'] = this.stockQuery.maxMarketValue
+      }
+      if (
+        this.stockQuery.miniRange != null &&
+        this.stockQuery.miniRange != ''
+      ) {
+        param['miniRange'] = this.stockQuery.miniRange
+      }
+      if (
+        this.stockQuery.maxRange != null &&
+        this.stockQuery.maxRange != ''
+      ) {
+        param['maxRange'] = this.stockQuery.maxRange
+      }
+      if (
+        this.stockQuery.miniSpeed != null &&
+        this.stockQuery.miniSpeed != ''
+      ) {
+        param['miniSpeed'] = this.stockQuery.miniSpeed
+      }
+      if (
+        this.stockQuery.maxSpeed != null &&
+        this.stockQuery.maxSpeed != ''
+      ) {
+        param['maxSpeed'] = this.stockQuery.maxSpeed
       }
       if (this.stockQuery.industrys.length != 0) {
         param['industrys'] = this.stockQuery.industrys
